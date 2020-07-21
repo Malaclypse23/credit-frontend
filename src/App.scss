@@ -1,0 +1,59 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 1vh auto;
+}
+
+.form-group {
+  min-width: 320px;
+  max-width: 500px;
+  text-align: center;
+  margin: 3em auto;
+}
+
+label {
+  padding-bottom: 1em;
+}
+
+.number {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+
+  input {
+    display: inline-block;
+    margin: 0.5em;
+    width: 4.5em;
+    -moz-appearance: initial;
+  }
+
+  label {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+table {
+  margin: 0 auto;
+  text-align: right;
+
+  th,
+  td {
+    width: 6em;
+
+    &:first-child {
+      width: 2.5em;
+    }
+  }
+}
+
+.calculate {
+  margin: 1.5em 0;
+}
+
+.hidden {
+  display: none;
+}
