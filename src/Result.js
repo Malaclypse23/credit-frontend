@@ -13,6 +13,8 @@ function Result(props) {
 
   if (props.isLoading) {
     return <div>Loading...</div>;
+  } else if (props.isError) {
+    return <div>Server Error - please try to reload!</div>;
   }
 
   return (

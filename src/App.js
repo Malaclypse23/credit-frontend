@@ -28,11 +28,15 @@ function App() {
     document.title = "Darlehensrechner";
   }, []);
 
-  const url = `/calculate?amount=${credit.amount}&interest=${credit.interest}&initial=${credit.initial}&years=${credit.years}`;
-  const [{ data, isLoading, isError }, fetchData] = useFetch(url);
+  const [{ data, isLoading, isError }, fetchData] = useFetch(
+    `/calculate?amount=${credit.amount}&interest=${credit.interest}&initial=${credit.initial}&years=${credit.years}`
+  );
 
   const calculate = async () => {
-    const result = await fetchData(url);
+    const result = await fetchData(
+      `/calculate?amount=${credit.amount}&interest=${credit.interest}&initial=${credit.initial}&years=${credit.years}`
+    );
+
     setResult({
       ...result,
       rates: data?.rates,
@@ -43,7 +47,7 @@ function App() {
 
   const handleChange = (e, name) => {
     setCredit({ ...credit, [name]: e[name] });
-    calculate();
+    calculate(); // TODO changing year and amount calculates old values, click on button calculation is correct.
   };
 
   return (
@@ -64,7 +68,7 @@ function App() {
               />
             </div>
             <div className="form-group number">
-              <label>Sollzins</label>
+              <label>Zins (%)</label>
               <NumericInput
                 type="number"
                 enableMobileNumericKeyboard
@@ -76,7 +80,7 @@ function App() {
                 value={credit.interest}
                 onChange={(interest) => handleChange({ interest }, "interest")}
               />
-              <label>Anfangstilgung (%)</label>
+              <label>Tilgung (%)</label>
               <NumericInput
                 type="number"
                 enableMobileNumericKeyboard
@@ -86,15 +90,16 @@ function App() {
                 value={credit.initial}
                 onChange={(initial) => handleChange({ initial }, "initial")}
               />
-            </div>
-            <div className="form-group">
-              <label>Zinsbindungsdauer (Jahre)</label>
-              <InputRange
-                maxValue={30}
-                minValue={0}
+              <label>Zinsbindung (Jahre)</label>
+              <NumericInput
+                type="number"
+                enableMobileNumericKeyboard
+                className="form-control"
+                step={1}
+                min={0}
+                max={30.0}
                 value={credit.years}
                 onChange={(years) => handleChange({ years }, "years")}
-                formatLabel={(value) => `${value} Jahre`}
               />
             </div>
           </form>
